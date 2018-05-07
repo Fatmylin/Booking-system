@@ -6,7 +6,7 @@ class Api::OrdersController < ApplicationController
 		exist_orders = Order.where("room_id = ?",order_params[:room_id])
 		#check if dates collide or not
 		flag = true
-
+		#if date we want to book collides with exist orders, the flag will turn false
 		exist_orders.each do|exist_order|
 			if @order.check_in < exist_order.check_in && @order.check_out <= exist_order.check_in 
 		  	    flag = true

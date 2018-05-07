@@ -16,12 +16,13 @@ class Api::RoomsController < ApplicationController
 			render json: @rooms
 
 		else
-			#find exist order
+			#find date in exist orderes which collide with check_in & check_out
 			@booked_ordersA = Order.where.not(["check_in <= ? and check_out < ?", check_in, check_in])
 			@booked_ordersB = Order.where.not(["check_in >= ? and check_out > ?", check_out, check_out])
 			@booked_orders = @booked_ordersA.merge @booked_ordersB
-			#find the empty room by exist order
+			#mapping the colliding order into an array
 			@booked_rooms = @booked_orders.map { |hash| hash[:room_id]  }
+			#find empty room 
 			@rooms = Room.where.not(id:@booked_rooms)
 			render json: @rooms
 			
