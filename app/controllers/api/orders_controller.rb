@@ -20,9 +20,9 @@ class Api::OrdersController < ApplicationController
 
 		 if flag
 		  @order.save
-		  render json: @order, status:200		  
+		  render json: @order,code:200		  
 		 else
-		  render :json => {:errors=>"該時段房型已無空房"}, status:403
+		  render :json => {:errors=>"該時段房型已無空房"}, status:403 
 		 end
 	end
 
